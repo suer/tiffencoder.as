@@ -1,15 +1,17 @@
-package
-{
+package grape.encoder {
     import flash.display.*;
+    import flash.filesystem.FileStream;
     import flash.geom.*;
     import flash.utils.*;
-    
-    import mx.controls.Alert;
         
     public class TiffEncoder {
         
         private var imgCache:Array = new Array(); 
 
+        /**
+         * キャッシュから探す
+         * @param url エンコード対象のファイルのURL
+         */
         private function search(url:String) :Object {
             for each (var obj:Object in imgCache) {
                 if (obj.url == url) {
@@ -19,7 +21,10 @@ package
             return null;
         }
         
-        public function decode(data:ByteArray, interval:int, url:String = null): BitmapData {
+        /**
+         * 
+         */ 
+        public function decode(data:FileStream, interval:int, url:String = null): BitmapData {
             if (url != null) {
                 var obj:Object = search(url);
                 if (obj != null) {
